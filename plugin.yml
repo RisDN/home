@@ -1,0 +1,15 @@
+name: Home
+version: 1.0.0
+author: Ris
+api-version: 1.18
+main: hu.ris.home.Main
+
+commands:
+  home:
+    description: Home parancs
+  sethome:
+    description: Home lerakása
+  delhome:
+    description: Home törlése
+  listhome:
+    description: Homeok listája

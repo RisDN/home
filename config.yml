@@ -1,0 +1,20 @@
+# Home plugin beállításai #
+
+prefix: '&d&l[&5Cica home&d&l]'
+
+# Várakozási idő teleportálásnál (másodpercben)
+# (Ne mozdulj meg..)
+varakozasiido: 3
+
+
+# Üzenetek #
+uzenetek:
+  nincsjogod: '%prefix% &cNincs jogod ehhez!'
+  hianyzoarg: '%prefix% &cKérlek adj meg egy otthon nevet'
+  sikereslerakas: '%prefix% &aSikeresen leraktad a(z) &f%nev%&a nevű otthont.'
+  sikerestorles: '%prefix% &aSikeresen törölted a(z) &f%nev%&a nevű otthont.'
+  sikeresteleport: '%prefix% &aSikeresen elteleportáltál a(z) &f%nev%&a nevű otthonodhoz.'
+  nincsegyse: '%prefix% &cNincsen egy mentett otthonod sem.'
+  nincsilyen: '%prefix% &cNincsen &f%nev%&c nevű otthonod.'
+  letezik: '%prefix% &cHiba! &f%nev%&c otthon már létezik.'
+  mentettek: '&dMentettek: '
