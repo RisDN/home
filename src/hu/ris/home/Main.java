@@ -10,15 +10,22 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import net.md_5.bungee.api.ChatColor;
+import net.md_5.bungee.api.chat.ClickEvent;
+import net.md_5.bungee.api.chat.HoverEvent;
+import net.md_5.bungee.api.chat.TextComponent;
+import net.md_5.bungee.api.chat.hover.content.Text;
 
 public class Main extends JavaPlugin {
 	
 	
 	FileManager fs;
+	TeleportDelay td;
 	public void onEnable() {
 		saveDefaultConfig();
 		fs = new FileManager(this, "userdata.yml");
+		td = new TeleportDelay(this);
 ;		getLogger().info("Home indul v" + getDescription().getVersion());
+		getServer().getPluginManager().registerEvents(td, this);
 	}
 	
 	private int teleportSched;
@@ -54,8 +61,12 @@ public class Main extends JavaPlugin {
 			savedHomes = fs.getConfig("userdata.yml").getConfigurationSection(String.valueOf(player.getUniqueId())).getKeys(false);
 			player.sendMessage(messageFormatter(getConfig().getString("uzenetek.mentettek")));
 			for(String cica : savedHomes) {
-				player.sendMessage(messageFormatter("&f - &e" + cica));
+		        TextComponent component = new TextComponent(TextComponent.fromLegacyText(messageFormatter("&f - &e" + cica)));
+		        component.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/home " + cica));
+		        component.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new Text(messageFormatter("&dKattints a teleportációhoz."))));
+		        player.spigot().sendMessage(component);
 			}
+			
 			return true;
 		}
 		
@@ -122,22 +133,21 @@ public class Main extends JavaPlugin {
 			teleportSched = Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Runnable() {
 				@Override
 				public void run() {
-					
 					player.sendMessage(messageFormatter(getConfig().getString("uzenetek.nemozdulj")
 					.replace("%mp%", String.valueOf(teleportTimer))));
+					td.setPlayerDelay(player, true);
 					if(teleportTimer == 0) {
-						Bukkit.getScheduler().cancelTask(teleportSched);
 						player.teleport(fs.getConfig("userdata.yml").getLocation(String.valueOf(player.getUniqueId() + "." + args[0])));
+						player.sendMessage(messageFormatter(getConfig().getString("uzenetek.sikeresteleport")
+						.replace("%nev%", args[0])));
+						td.setPlayerDelay(player, false);
+						Bukkit.getScheduler().cancelTask(teleportSched);
 					}
 					teleportTimer--;
 				}
 				
 			}, 0, 20);
-			player.sendMessage(messageFormatter(getConfig().getString("uzenetek.sikeresteleport")
-			.replace("%nev%", args[0])));
-			fs.getConfig("userdata.yml").set(player.getUniqueId() + "." + args[0], null);
-			fs.saveConfig("userdata.yml");
-			fs.reloadConfig("userdata.yml");
+
 			return true;
 		}	
 		

@@ -14,6 +14,8 @@ uzenetek:
   sikereslerakas: '%prefix% &aSikeresen leraktad a(z) &f%nev%&a nevű otthont.'
   sikerestorles: '%prefix% &aSikeresen törölted a(z) &f%nev%&a nevű otthont.'
   sikeresteleport: '%prefix% &aSikeresen elteleportáltál a(z) &f%nev%&a nevű otthonodhoz.'
+  nemozdulj: '%prefix% &aNe mozdulj! Elteleportálunk &f%mp%&a másodperc múlva.'
+  megmozdult: '%prefix% &cTeleportálás megszakítva, hiszen megmozdultál.'
   nincsegyse: '%prefix% &cNincsen egy mentett otthonod sem.'
   nincsilyen: '%prefix% &cNincsen &f%nev%&c nevű otthonod.'
   letezik: '%prefix% &cHiba! &f%nev%&c otthon már létezik.'

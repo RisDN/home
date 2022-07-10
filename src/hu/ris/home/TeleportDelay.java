@@ -39,7 +39,8 @@ public class TeleportDelay implements Listener {
 		}
 
 		Bukkit.getScheduler().cancelTask(plugin.getTeleportShed());
-		p.sendMessage(plugin.getConfig().getString(plugin.messageFormatter("uzenetek.megmozdultal")));
+		setPlayerDelay(p, false);
+		p.sendMessage(plugin.messageFormatter(plugin.getConfig().getString("uzenetek.megmozdult")));
 		
 		
 	}
